@@ -1,6 +1,15 @@
-import { Button } from '@/components/ui/button';
-import Image from 'next/image';
+import { Container } from '@/components/shared';
+import { Title } from '@/components/shared';
+import { TopBar } from '@/components/shared/top-bar';
 
 export default function Home() {
-  return <Button variant="outline">Liza</Button>;
+  return (
+    <>
+      <Container className="mt-10">
+        <Title text="All pizzas" size="lg" className="font-extrabold" />
+      </Container>
+
+      <TopBar />
+    </>
+  );
 }
