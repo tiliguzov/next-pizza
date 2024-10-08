@@ -1,5 +1,5 @@
 import React from 'react';
-import { FilterCheckbox, RangeSlider, Title } from '.';
+import { CheckboxFiltersGroup, FilterCheckbox, RangeSlider, Title } from '.';
 import { Input } from '../ui';
 
 interface Props {
@@ -27,6 +27,136 @@ export const Filters: React.FC<Props> = ({ className }) => {
 
         <RangeSlider min={0} max={1000} step={10} value={[0, 1000]} />
       </div>
+
+      <CheckboxFiltersGroup
+        title="Ingridients"
+        className="mt-5"
+        limit={6}
+        defaultItems={[
+          {
+            text: 'Сырный соус',
+            value: '1',
+          },
+          {
+            text: 'Моццарелла',
+            value: '2',
+          },
+          {
+            text: 'Чеснок',
+            value: '3',
+          },
+          {
+            text: 'Солённые огурчики',
+            value: '4',
+          },
+          {
+            text: 'Красный лук',
+            value: '5',
+          },
+          {
+            text: 'Томаты',
+            value: '6',
+          },
+        ]}
+        items={[
+          {
+            text: 'Сырный соус',
+            value: '1',
+          },
+          {
+            text: 'Моццарелла',
+            value: '2',
+          },
+          {
+            text: 'Чеснок',
+            value: '3',
+          },
+          {
+            text: 'Солённые огурчики',
+            value: '4',
+          },
+          {
+            text: 'Красный лук',
+            value: '5',
+          },
+          {
+            text: 'Томаты',
+            value: '6',
+          },
+          {
+            text: 'Сырный соус',
+            value: '1',
+          },
+          {
+            text: 'Моццарелла',
+            value: '2',
+          },
+          {
+            text: 'Чеснок',
+            value: '3',
+          },
+          {
+            text: 'Солённые огурчики',
+            value: '4',
+          },
+          {
+            text: 'Красный лук',
+            value: '5',
+          },
+          {
+            text: 'Томаты',
+            value: '6',
+          },
+          {
+            text: 'Сырный соус',
+            value: '1',
+          },
+          {
+            text: 'Моццарелла',
+            value: '2',
+          },
+          {
+            text: 'Чеснок',
+            value: '3',
+          },
+          {
+            text: 'Солённые огурчики',
+            value: '4',
+          },
+          {
+            text: 'Красный лук',
+            value: '5',
+          },
+          {
+            text: 'Томаты',
+            value: '6',
+          },
+          {
+            text: 'Сырный соус',
+            value: '1',
+          },
+          {
+            text: 'Моццарелла',
+            value: '2',
+          },
+          {
+            text: 'Чеснок',
+            value: '3',
+          },
+          {
+            text: 'Солённые огурчики',
+            value: '4',
+          },
+          {
+            text: 'Красный лук',
+            value: '5',
+          },
+          {
+            text: 'Томаты',
+            value: '6',
+          },
+        ]}
+      />
     </div>
   );
 };
