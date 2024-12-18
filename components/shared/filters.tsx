@@ -34,125 +34,125 @@ export const Filters: React.FC<Props> = ({ className }) => {
         limit={6}
         defaultItems={[
           {
-            text: 'Сырный соус',
+            text: 'Сheese sauce',
             value: '1',
           },
           {
-            text: 'Моццарелла',
+            text: 'Mozzarella',
             value: '2',
           },
           {
-            text: 'Чеснок',
+            text: 'Garlic',
             value: '3',
           },
           {
-            text: 'Солённые огурчики',
+            text: 'Pickled cucumbers',
             value: '4',
           },
           {
-            text: 'Красный лук',
+            text: 'Red onion',
             value: '5',
           },
           {
-            text: 'Томаты',
+            text: 'Tomatoes',
             value: '6',
           },
         ]}
         items={[
           {
-            text: 'Сырный соус',
+            text: 'Сheese sauce',
             value: '1',
           },
           {
-            text: 'Моццарелла',
+            text: 'Mozzarella',
             value: '2',
           },
           {
-            text: 'Чеснок',
+            text: 'Garlic',
             value: '3',
           },
           {
-            text: 'Солённые огурчики',
+            text: 'Pickled cucumbers',
             value: '4',
           },
           {
-            text: 'Красный лук',
+            text: 'Red onion',
             value: '5',
           },
           {
-            text: 'Томаты',
+            text: 'Tomatoes',
             value: '6',
           },
           {
-            text: 'Сырный соус',
+            text: 'Сheese sauce',
             value: '1',
           },
           {
-            text: 'Моццарелла',
+            text: 'Mozzarella',
             value: '2',
           },
           {
-            text: 'Чеснок',
+            text: 'Garlic',
             value: '3',
           },
           {
-            text: 'Солённые огурчики',
+            text: 'Pickled cucumbers',
             value: '4',
           },
           {
-            text: 'Красный лук',
+            text: 'Red onion',
             value: '5',
           },
           {
-            text: 'Томаты',
+            text: 'Tomatoes',
             value: '6',
           },
           {
-            text: 'Сырный соус',
+            text: 'Сheese sauce',
             value: '1',
           },
           {
-            text: 'Моццарелла',
+            text: 'Mozzarella',
             value: '2',
           },
           {
-            text: 'Чеснок',
+            text: 'Garlic',
             value: '3',
           },
           {
-            text: 'Солённые огурчики',
+            text: 'Pickled cucumbers',
             value: '4',
           },
           {
-            text: 'Красный лук',
+            text: 'Red onion',
             value: '5',
           },
           {
-            text: 'Томаты',
+            text: 'Tomatoes',
             value: '6',
           },
           {
-            text: 'Сырный соус',
+            text: 'Сheese sauce',
             value: '1',
           },
           {
-            text: 'Моццарелла',
+            text: 'Mozzarella',
             value: '2',
           },
           {
-            text: 'Чеснок',
+            text: 'Garlic',
             value: '3',
           },
           {
-            text: 'Солённые огурчики',
+            text: 'Pickled cucumbers',
             value: '4',
           },
           {
-            text: 'Красный лук',
+            text: 'Red onion',
             value: '5',
           },
           {
-            text: 'Томаты',
+            text: 'Tomatoes',
             value: '6',
           },
         ]}
