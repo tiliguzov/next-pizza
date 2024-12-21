@@ -1,3 +1,4 @@
+export { SearchInput } from './search-input';
 export { Title } from './title';
 export { Header } from './header';
 export { Container } from './container';
