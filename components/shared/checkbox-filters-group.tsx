@@ -29,7 +29,6 @@ export const CheckboxFiltersGroup: React.FC<Props> = ({
   loading,
   onClickCkeckbox,
   selected,
-  defaultValue,
   className,
   name,
 }) => {
