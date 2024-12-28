@@ -16,6 +16,6 @@ export const useQueryFilters = (filters: Filters) => {
 
     const query = qs.stringify(params, { arrayFormat: 'comma' });
 
-    router.push(`/?${query}`, { scroll: false });
+    if (query) router.push(`/?${query}`, { scroll: false });
   }, [filters, router]);
 };

@@ -18,8 +18,6 @@ export const SearchInput: React.FC<Props> = ({ className }) => {
   const [products, setProducts] = React.useState<Product[]>([]);
   const ref = React.useRef(null);
 
-  console.log('SEARCH QUERY', searchQuery);
-
   useClickAway(ref, () => {
     setFocused(false);
   });
