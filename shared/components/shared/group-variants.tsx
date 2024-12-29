@@ -1,6 +1,6 @@
 'use client';
 
-import { cn } from '@/lib/utils';
+import { cn } from '@/shared/lib/utils';
 import React from 'react';
 
 type Variant = {
@@ -10,13 +10,15 @@ type Variant = {
 };
 
 interface Props {
-  items: readonly Variant[];
+  items: Variant[];
   onClick?: (value: Variant['value']) => void;
   selectedValue?: Variant['value'];
   className?: string;
 }
 
 export const GroupVariants: React.FC<Props> = ({ items, onClick, className, selectedValue }) => {
+  console.log('items ', items);
+
   return (
     <div className={cn(className, 'flex justify-between bg-[#F3F3F7] rounded-3xl p-1 select-none')}>
       {items.map((item) => (

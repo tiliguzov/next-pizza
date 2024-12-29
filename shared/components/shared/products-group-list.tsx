@@ -3,8 +3,8 @@
 import React from 'react';
 import { ProductCard, Title } from '.';
 import { useIntersection } from 'react-use';
-import { cn } from '@/lib/utils';
-import { useCategoryStore } from '@/store/category';
+import { cn } from '@/shared/lib/utils';
+import { useCategoryStore } from '@/shared/store/category';
 
 interface Props {
   title: string;
