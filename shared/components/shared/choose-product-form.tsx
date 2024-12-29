@@ -7,10 +7,15 @@ interface Props {
   imageUrl: string;
   name: string;
   className?: string;
-  onClickAdd?: VoidFunction;
+  onClickAddCart?: VoidFunction;
 }
 
-export const ChooseProductForm: React.FC<Props> = ({ name, imageUrl, onClickAdd, className }) => {
+export const ChooseProductForm: React.FC<Props> = ({
+  name,
+  imageUrl,
+  onClickAddCart,
+  className,
+}) => {
   const textDetails = '30см, традиционное тесто 30';
   const totalPrice = 350;
 

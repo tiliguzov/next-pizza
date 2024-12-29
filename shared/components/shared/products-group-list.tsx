@@ -5,10 +5,11 @@ import { ProductCard, Title } from '.';
 import { useIntersection } from 'react-use';
 import { cn } from '@/shared/lib/utils';
 import { useCategoryStore } from '@/shared/store/category';
+import { ProductWithRelations } from '@/@types/prisma';
 
 interface Props {
   title: string;
-  items: any[];
+  items: ProductWithRelations[];
   className?: string;
   listClassName?: string;
   categoryId: number;
@@ -29,7 +30,7 @@ export const ProductsGroupList: React.FC<Props> = ({
     if (intersection?.isIntersecting) {
       setActiveCategory(categoryId);
     }
-  }, [categoryId, intersection?.isIntersecting, title]);
+  }, [categoryId, intersection?.isIntersecting, setActiveCategory, title]);
 
   return (
     <div className={className} id={title} ref={intersectionRef}>
