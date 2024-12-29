@@ -9,7 +9,16 @@ export default async function ProductModalPage({ params: { id } }: { params: { i
     },
     include: {
       ingredients: true,
-      variations: true,
+      variations: {
+        orderBy: [
+          {
+            pizzaType: 'asc',
+          },
+          {
+            size: 'asc',
+          },
+        ],
+      },
     },
   });
 
