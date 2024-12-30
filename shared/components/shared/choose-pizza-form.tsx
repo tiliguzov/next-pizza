@@ -1,17 +1,13 @@
+'use client';
+
 import { cn } from '@/shared/lib/utils';
 import React from 'react';
 import { Button } from '../ui';
 import { GroupVariants, IngredientItem, PizzaImage, Title } from '.';
-import {
-  mapPizzaSize,
-  mapPizzaType,
-  PizzaSize,
-  pizzaSizes,
-  PizzaType,
-  pizzaTypes,
-} from '@/shared/constants/pizza';
+import { mapPizzaType, PizzaSize, PizzaType } from '@/shared/constants/pizza';
 import { Ingredient, ProductVariation } from '@prisma/client';
-import { useSet } from 'react-use';
+import { calcTotalPizzaPrice, getAvailablePizzaSizes } from '@/shared/lib';
+import { usePizzaOptions } from '@/shared/hooks';
 
 interface Props {
   imageUrl: string;
@@ -30,50 +26,18 @@ export const ChoosePizzaForm: React.FC<Props> = ({
   onClickAddCart,
   className,
 }) => {
-  const [size, setSize] = React.useState<PizzaSize>(variations[0].size as PizzaSize);
-  const [type, setType] = React.useState<PizzaType>(variations[0].pizzaType as PizzaType);
-
-  const [selectedIngredients, { toggle: addIngredient }] = useSet(new Set<number>([]));
-
-  const currentVariant = variations.find(
-    (variation) => variation.pizzaType === type && variation.size === size,
-  );
-
-  if (!currentVariant) {
-    setSize(variations.find((variation) => variation.pizzaType === type)?.size as PizzaSize);
-  }
-
-  const pizzaPrice = currentVariant?.price || 0;
-
-  const totalIngredientsPrice = ingredients
-    .filter((ingredient) => selectedIngredients.has(ingredient.id))
-    .reduce((acc, ingredient) => acc + ingredient.price, 0);
+  const { size, type, selectedIngredients, setSize, setType, addIngredient } =
+    usePizzaOptions(variations);
 
   const textDetails = `${size} sm, ${mapPizzaType[type]} dough`;
-  const totalPrice = pizzaPrice + totalIngredientsPrice;
+  const totalPrice = calcTotalPizzaPrice(size, type, variations, ingredients, selectedIngredients);
 
   const handleOnClickCart = () => {
     onClickAddCart?.();
     console.log({ size, type, ingredients: selectedIngredients });
   };
 
-  const availablePizzaTypes = pizzaTypes.map((pizzaType) => ({
-    name: pizzaType.name,
-    value: pizzaType.value,
-    disabled: !variations.find((variation) => {
-      const type = variation.pizzaType as 1 | 2;
-      return mapPizzaType[type] === pizzaType.name;
-    }),
-  }));
-
-  const availablePizzaSizes = pizzaSizes.map((pizzaSize) => ({
-    name: pizzaSize.name,
-    value: pizzaSize.value,
-    disabled: !variations.find((variation) => {
-      const size = variation.size as 20 | 30 | 40;
-      return mapPizzaSize[size] === pizzaSize.name && type === variation.pizzaType;
-    }),
-  }));
+  const { availablePizzaSizes, availablePizzaTypes } = getAvailablePizzaSizes(type, variations);
 
   return (
     <div className={cn(className, 'flex flex-1')}>
