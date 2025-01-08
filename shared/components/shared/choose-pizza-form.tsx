@@ -15,6 +15,7 @@ interface Props {
   className?: string;
   ingredients: Ingredient[];
   variations: ProductVariation[];
+  loading?: boolean;
   onClickAddCart: (variationId: number, ingredients: number[]) => void;
 }
 
@@ -23,6 +24,7 @@ export const ChoosePizzaForm: React.FC<Props> = ({
   variations,
   imageUrl,
   ingredients,
+  loading,
   onClickAddCart,
   className,
 }) => {
@@ -79,6 +81,7 @@ export const ChoosePizzaForm: React.FC<Props> = ({
         </div>
 
         <Button
+          loading={loading}
           className="h-[55px] px-10 text-base rounded-[18px] w-full mt-10"
           onClick={handleOnClickCart}>
           Добавить в корзину за {totalPrice} $
