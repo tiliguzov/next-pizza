@@ -15,7 +15,7 @@ interface Props {
   className?: string;
   ingredients: Ingredient[];
   variations: ProductVariation[];
-  onClickAddCart?: VoidFunction;
+  onClickAddCart: (variationId: number, ingredients: number[]) => void;
 }
 
 export const ChoosePizzaForm: React.FC<Props> = ({
@@ -26,15 +26,16 @@ export const ChoosePizzaForm: React.FC<Props> = ({
   onClickAddCart,
   className,
 }) => {
-  const { size, type, selectedIngredients, setSize, setType, addIngredient } =
+  const { size, type, selectedIngredients, currentVariationId, setSize, setType, addIngredient } =
     usePizzaOptions(variations);
 
   const textDetails = `${size} sm, ${mapPizzaType[type]} dough`;
   const totalPrice = calcTotalPizzaPrice(size, type, variations, ingredients, selectedIngredients);
 
   const handleOnClickCart = () => {
-    onClickAddCart?.();
-    console.log({ size, type, ingredients: selectedIngredients });
+    if (currentVariationId) {
+      onClickAddCart(currentVariationId, Array.from(selectedIngredients));
+    }
   };
 
   const { availablePizzaSizes, availablePizzaTypes } = getAvailablePizzaSizes(type, variations);
