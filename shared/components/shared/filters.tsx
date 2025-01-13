@@ -37,8 +37,8 @@ export const Filters: React.FC<Props> = ({ className }) => {
         onClickCkeckbox={filters.setPizzaTypes}
         selected={filters.pizzaTypes}
         items={[
-          { text: 'тонкое', value: '1' },
-          { text: 'традиционное', value: '2' },
+          { text: 'традиционное', value: '1' },
+          { text: 'тонкое', value: '2' },
         ]}
       />
 
