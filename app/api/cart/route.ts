@@ -57,7 +57,7 @@ export async function POST(req: NextRequest) {
 
     const data = (await req.json()) as CreateCartItemDTO;
 
-    const findCartItem = await prisma.cartItem.findFirst({
+    const findCartItems = await prisma.cartItem.findMany({
       where: {
         cartId: userCart.id,
         productVariationId: data.productVariationId,
@@ -69,7 +69,14 @@ export async function POST(req: NextRequest) {
           },
         },
       },
+      include: {
+        ingredients: true,
+      },
     });
+
+    const findCartItem = findCartItems.find(
+      (item) => item.ingredients.length === data.ingredients?.length,
+    );
 
     if (findCartItem) {
       await prisma.cartItem.update({
