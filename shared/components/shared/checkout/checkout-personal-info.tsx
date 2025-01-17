@@ -13,6 +13,7 @@ export const CheckoutPersonalInfo: React.FC<Props> = ({ className }) => {
         <FormInput name="firstName" className="text-base" placeholder="name" />
         <FormInput name="lastName" className="text-base" placeholder="last name" />
         <FormInput name="email" className="text-base" placeholder="email" />
+        {/* TODO: validate phone number using React imask*/}
         <FormInput name="phone" className="text-base" placeholder="phone number" />
       </div>
     </WhiteBlock>
