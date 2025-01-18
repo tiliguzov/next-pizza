@@ -32,3 +32,4 @@ export * from './modals';
 export * from './form';
 export * from './checkout';
 export * from './cart-item-details';
+export * from './email-templates';

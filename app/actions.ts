@@ -1,7 +1,9 @@
 'use server';
 
 import { prisma } from '@/prisma/prisma-client';
+import { PayOrderTemplate } from '@/shared/components';
 import { CheckoutFormValues } from '@/shared/constants/checkout-form-schema';
+import { sendEmail } from '@/shared/lib';
 import { OrderStatus } from '@prisma/client';
 import { cookies } from 'next/headers';
 
@@ -72,8 +74,19 @@ export async function createOrder(data: CheckoutFormValues) {
 
     // TODO: use umoney
 
+    await sendEmail(
+      data.email,
+      'Next Pizza / Pay for the order #' + order.id,
+      PayOrderTemplate({
+        orderId: order.id,
+        totalPrice: order.totalPrice,
+        paymentUrl:
+          'https://vercel.com/tiliguzovs-projects/~/stores/integration/store_aGASSGnUFoDGHOF4/settings',
+      }),
+    );
+
     return '';
   } catch (err) {
-    console.log(err);
+    console.log('[CreateOrder] Server error', err);
   }
 }
