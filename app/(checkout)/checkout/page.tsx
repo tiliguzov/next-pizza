@@ -31,6 +31,7 @@ export default function CheckoutPage() {
       phone: '',
       address: '',
       comment: '',
+      totalPrice: 0,
     },
   });
 
@@ -41,6 +42,8 @@ export default function CheckoutPage() {
 
       toast.success('Order is successfully created! redirection to payment...');
 
+      console.log(url);
+
       if (url) {
         location.href = url;
       }
@@ -48,6 +51,8 @@ export default function CheckoutPage() {
       setSubmiting(false);
       console.log(err);
       toast.error("Couldn't create an order");
+    } finally {
+      setSubmiting(false);
     }
   };
 

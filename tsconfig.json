@@ -27,7 +27,8 @@
     "**/*.tsx",
     ".next/types/**/*.ts",
     "app/(root)/@modal/default.js",
-    "app/(root)/@modal/default.js"
+    "app/(root)/@modal/default.js",
+    "app/api/create-link-token/route.js"
   ],
   "exclude": ["node_modules"]
 }

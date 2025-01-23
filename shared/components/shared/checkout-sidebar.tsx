@@ -4,6 +4,7 @@ import { CheckoutItemDetails } from './checkout-item-details';
 import { ArrowRight, Package, Percent, Truck } from 'lucide-react';
 import { Button, Skeleton } from '../ui';
 import { cn } from '@/shared/lib/utils';
+import { useFormContext } from 'react-hook-form';
 
 const VAT = 15;
 const DELIVERY_PRICE = 250;
@@ -15,8 +16,12 @@ interface Props {
 }
 
 export const CheckoutSidebar: React.FC<Props> = ({ totalAmount, loading, className }) => {
+  const { setValue } = useFormContext();
+
   const vatPrice = (totalAmount * VAT) / 100;
-  const totalPrice = totalAmount + vatPrice + DELIVERY_PRICE;
+  const totalPrice = totalAmount + vatPrice + (totalAmount ? DELIVERY_PRICE : 0);
+
+  setValue('totalPrice', totalPrice);
 
   return (
     <WhiteBlock className={cn('p-6 sticky top-4', className)}>
@@ -54,7 +59,13 @@ export const CheckoutSidebar: React.FC<Props> = ({ totalAmount, loading, classNa
             Delivery:
           </div>
         }
-        value={loading ? <Skeleton className="w-16 h-6 rounded-[6px]" /> : `$${DELIVERY_PRICE}`}
+        value={
+          loading ? (
+            <Skeleton className="w-16 h-6 rounded-[6px]" />
+          ) : (
+            `$${totalAmount ? DELIVERY_PRICE : 0}`
+          )
+        }
       />
 
       <Button

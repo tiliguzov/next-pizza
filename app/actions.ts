@@ -3,7 +3,7 @@
 import { prisma } from '@/prisma/prisma-client';
 import { PayOrderTemplate } from '@/shared/components';
 import { CheckoutFormValues } from '@/shared/constants/checkout-form-schema';
-import { sendEmail } from '@/shared/lib';
+import { createCheckoutSession, sendEmail } from '@/shared/lib';
 import { OrderStatus } from '@prisma/client';
 import { cookies } from 'next/headers';
 
@@ -72,7 +72,15 @@ export async function createOrder(data: CheckoutFormValues) {
       },
     });
 
-    // TODO: use umoney
+    const response = await createCheckoutSession(data);
+
+    const url = response;
+
+    console.log(url);
+
+    if (!url) {
+      throw 'Cant create payment';
+    }
 
     await sendEmail(
       data.email,
@@ -80,12 +88,11 @@ export async function createOrder(data: CheckoutFormValues) {
       PayOrderTemplate({
         orderId: order.id,
         totalPrice: order.totalPrice,
-        paymentUrl:
-          'https://vercel.com/tiliguzovs-projects/~/stores/integration/store_aGASSGnUFoDGHOF4/settings',
+        paymentUrl: url,
       }),
     );
 
-    return '';
+    return url;
   } catch (err) {
     console.log('[CreateOrder] Server error', err);
   }

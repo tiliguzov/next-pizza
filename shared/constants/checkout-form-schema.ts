@@ -7,6 +7,7 @@ export const checkoutFormSchema = z.object({
   phone: z.string().min(10, { message: 'enter the correct phone' }),
   address: z.string().min(5, { message: 'enter the correct address' }),
   comment: z.string().optional(),
+  totalPrice: z.number(),
 });
 
 export type CheckoutFormValues = z.infer<typeof checkoutFormSchema>;
