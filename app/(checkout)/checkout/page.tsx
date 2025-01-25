@@ -30,6 +30,7 @@ export default function CheckoutPage() {
       lastName: '',
       phone: '',
       address: '',
+      addressId: '',
       comment: '',
       totalPrice: 0,
     },
@@ -37,6 +38,7 @@ export default function CheckoutPage() {
 
   const onSubmit = async (data: CheckoutFormValues) => {
     try {
+      console.log(data);
       setSubmiting(true);
       const url = await createOrder(data);
 
@@ -56,12 +58,16 @@ export default function CheckoutPage() {
     }
   };
 
+  const onError = (errors: any) => {
+    console.log('Validation Errors:', errors); // Log validation errors if submission fails
+  };
+
   return (
     <Container className="mt-10">
       <Title className="font-extrabold mb-8 text-[36px]" text="Making an order" />
 
       <FormProvider {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)}>
+        <form onSubmit={form.handleSubmit(onSubmit, onError)}>
           <div className="flex gap-10">
             {/* Left part */}
 

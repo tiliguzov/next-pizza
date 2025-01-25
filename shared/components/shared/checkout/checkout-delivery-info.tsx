@@ -1,30 +1,26 @@
 import React from 'react';
 import { WhiteBlock } from '../white-block';
 import { FormTextarea } from '../form';
-import { AddressInput } from '../address-input';
-import { Controller, useFormContext } from 'react-hook-form';
-import { ErrorText } from '../error-text';
+import { AddressInput } from '../form/address-input';
 
 interface Props {
   className?: string;
 }
 
 export const CheckoutDeliveryInfo: React.FC<Props> = ({ className }) => {
-  const { control } = useFormContext();
+  const handleAddressValidationChange = (isValid: boolean) => {
+    console.log('Address Valid:', isValid);
+  };
 
   return (
     <div className={className}>
       <WhiteBlock title="3. Delivery address">
         <div className="flex flex-col gap-5">
-          <Controller
-            control={control}
+          <AddressInput
             name="address"
-            render={({ field, fieldState }) => (
-              <>
-                <AddressInput onChange={field.onChange} />
-                {fieldState.error?.message && <ErrorText text={fieldState.error.message} />}
-              </>
-            )}
+            idName="addressId"
+            className="text-base"
+            onValidationChange={handleAddressValidationChange}
           />
           <FormTextarea
             name="comment"
