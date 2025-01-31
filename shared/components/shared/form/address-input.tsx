@@ -5,6 +5,8 @@ import { useFormContext } from 'react-hook-form';
 import { Input } from '../../ui';
 import { ErrorText, ClearButton } from '..';
 import { useLoadScript } from '@react-google-maps/api';
+import { transformGoogleAddress } from '@/shared/lib';
+import { useAddressStore } from '@/shared/store';
 
 interface AddressInputProps {
   name: string;
@@ -22,6 +24,8 @@ export const AddressInput: React.FC<AddressInputProps> = ({
   onValidationChange,
 }) => {
   const [suggestions, setSuggestions] = useState<any[]>([]);
+  const setAddress = useAddressStore((store) => store.setAddress);
+
   const {
     register,
     setValue,
@@ -38,7 +42,7 @@ export const AddressInput: React.FC<AddressInputProps> = ({
     libraries: libraries as any,
   });
 
-  if (!isLoaded) return <p>Loading...</p>;
+  if (!isLoaded) return;
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const inputValue = e.target.value;
@@ -85,13 +89,24 @@ export const AddressInput: React.FC<AddressInputProps> = ({
 
         if (!isValid) {
           setValue(idName, '', { shouldValidate: true });
+        } else {
+          if (addressComponents) {
+            setAddress(transformGoogleAddress(addressComponents));
+          }
         }
       }
     });
   };
 
   const validateAddressComponents = (components: any[]): boolean => {
-    const requiredComponents = ['street_number', 'route', 'locality', 'postal_code', 'country'];
+    const requiredComponents = [
+      'street_number',
+      'route',
+      'administrative_area_level_1',
+      'locality',
+      'postal_code',
+      'country',
+    ];
     const foundComponents = components.map((component) =>
       component.types.find((type: string) => requiredComponents.includes(type)),
     );

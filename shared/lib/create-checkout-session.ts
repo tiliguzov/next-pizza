@@ -1,24 +1,45 @@
 import { CheckoutFormValues } from '@/shared/constants/checkout-form-schema';
-import Stripe from 'stripe';
+import { Address } from '../store';
+import { getCustomerId, stripe } from '.';
+import { DELIVERY_PRICE } from '../constants/payment';
 
-const stripe = new Stripe(process.env.NEXT_PUBLIC_STRIPE_SECRET_KEY!);
+export const createCheckoutSession = async (data: CheckoutFormValues, address: Address) => {
+  const customerId = await getCustomerId(data.email, address, data.firstName + ' ' + data.lastName);
 
-export const createCheckoutSession = async (data: CheckoutFormValues) => {
-  console.log(data.totalPrice);
   const session = await stripe.checkout.sessions.create({
     payment_method_types: ['card'],
-    customer_email: data.email,
+    customer: String(customerId),
     line_items: [
       {
         price_data: {
           currency: 'usd',
           product_data: {
             name: 'Sample Product',
-            description: data.comment || 'No additional comments', // Pass user comments here
+            description: data.comment || 'No additional comments',
           },
-          unit_amount: data.totalPrice * 100, // Price in cents
+          unit_amount: Math.floor(data.totalPrice * 100),
         },
+        tax_rates: ['txr_1QnSmx2YBaZ7DgZdqhcUVxIC'],
         quantity: 1,
+      },
+    ],
+    shipping_address_collection: {
+      allowed_countries: ['US'],
+    },
+    shipping_options: [
+      {
+        shipping_rate_data: {
+          type: 'fixed_amount',
+          fixed_amount: {
+            amount: DELIVERY_PRICE * 100,
+            currency: 'usd',
+          },
+          display_name: 'Standard Shipping',
+          delivery_estimate: {
+            minimum: { unit: 'business_day', value: 3 },
+            maximum: { unit: 'business_day', value: 5 },
+          },
+        },
       },
     ],
     mode: 'payment',

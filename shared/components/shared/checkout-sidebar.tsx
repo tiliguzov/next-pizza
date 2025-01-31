@@ -5,9 +5,7 @@ import { ArrowRight, Package, Percent, Truck } from 'lucide-react';
 import { Button, Skeleton } from '../ui';
 import { cn } from '@/shared/lib/utils';
 import { useFormContext } from 'react-hook-form';
-
-const VAT = 15;
-const DELIVERY_PRICE = 250;
+import { DELIVERY_PRICE, VAT } from '@/shared/constants/payment';
 
 interface Props {
   totalAmount: number;
@@ -21,7 +19,7 @@ export const CheckoutSidebar: React.FC<Props> = ({ totalAmount, loading, classNa
   const vatPrice = (totalAmount * VAT) / 100;
   const totalPrice = totalAmount + vatPrice + (totalAmount ? DELIVERY_PRICE : 0);
 
-  setValue('totalPrice', totalPrice);
+  setValue('totalPrice', totalAmount);
 
   return (
     <WhiteBlock className={cn('p-6 sticky top-4', className)}>

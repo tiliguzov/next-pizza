@@ -17,10 +17,12 @@ import { checkoutFormSchema, CheckoutFormValues } from '@/shared/constants/check
 import { createOrder } from '@/app/actions';
 import toast from 'react-hot-toast';
 import React from 'react';
+import { useAddressStore } from '@/shared/store';
 
 export default function CheckoutPage() {
   const { totalAmount, loading } = useCart();
   const [submiting, setSubmiting] = React.useState(false);
+  const address = useAddressStore((state) => state.address);
 
   const form = useForm<CheckoutFormValues>({
     resolver: zodResolver(checkoutFormSchema),
@@ -40,14 +42,13 @@ export default function CheckoutPage() {
     try {
       console.log(data);
       setSubmiting(true);
-      const url = await createOrder(data);
-
-      toast.success('Order is successfully created! redirection to payment...');
-
-      console.log(url);
+      const url = await createOrder(data, address);
 
       if (url) {
+        toast.success('Order is successfully created! redirection to payment...');
         location.href = url;
+      } else {
+        throw "URL didn't create";
       }
     } catch (err) {
       setSubmiting(false);
@@ -59,7 +60,7 @@ export default function CheckoutPage() {
   };
 
   const onError = (errors: any) => {
-    console.log('Validation Errors:', errors); // Log validation errors if submission fails
+    console.log('Validation Errors:', errors);
   };
 
   return (
