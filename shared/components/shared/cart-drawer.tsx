@@ -4,7 +4,6 @@ import React from 'react';
 
 import {
   Sheet,
-  SheetClose,
   SheetContent,
   SheetFooter,
   SheetHeader,
@@ -13,14 +12,13 @@ import {
 } from '@/shared/components/ui/sheet';
 import Link from 'next/link';
 import { Button } from '../ui';
-import { ArrowLeft, ArrowRight } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 import { CartDrawerItem } from './cart-drawer-item';
 import { getCartItemDetails } from '@/shared/lib';
 import { PizzaSize, PizzaType } from '@/shared/constants/pizza';
-import Image from 'next/image';
-import { Title } from './title';
 import { cn } from '@/shared/lib/utils';
 import { useCart } from '@/shared/hooks';
+import { CartDrawerEmpty } from './cart-drawer-empty';
 
 export const CartDrawer: React.FC<React.PropsWithChildren> = ({ children }) => {
   const { totalAmount, updateItemQuantity, items, removeCartItem } = useCart();
@@ -44,23 +42,7 @@ export const CartDrawer: React.FC<React.PropsWithChildren> = ({ children }) => {
             </SheetHeader>
           )}
 
-          {!totalAmount && (
-            <div className="flex flex-col items-center justify-center w-72 mx-auto">
-              <Image src="/assets/images/empty-box.png" alt="Empty cart" width={120} height={120} />
-              <Title size="sm" text="Cart it empty" className="text-center font-bold my-2" />
-              <p className="text-center text-neutral-500 mb-5">
-                Add at least one pizza to make an order
-              </p>
-
-              <SheetClose>
-                <Button className="w-56 h-12 text-base" size="lg">
-                  <ArrowLeft className="w-5 mr-2" />
-                  Return back
-                </Button>
-                '
-              </SheetClose>
-            </div>
-          )}
+          {!totalAmount && <CartDrawerEmpty />}
 
           {totalAmount > 0 && (
             <>

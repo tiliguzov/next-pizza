@@ -7,4 +7,4 @@ export { sendEmail } from './send-email';
 export { createCheckoutSession } from './create-checkout-session';
 export { transformGoogleAddress } from './transform-google-address';
 export { getCustomerId } from './get-customer-id';
-export { stripe } from './stripe';
+export { stripe } from './stripe-client';

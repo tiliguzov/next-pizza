@@ -1,3 +1,4 @@
+import { CartEmpty } from './cart-drawer-empty';
 export { SearchInput } from './search-input';
 export { Title } from './title';
 export { Header } from './header';
@@ -29,6 +30,7 @@ export { RequiredSymbol } from './required-symbol';
 export { ErrorText } from './error-text';
 export { ClearButton } from './clear-button';
 export { AddressInput } from './form/address-input';
+export { CartDrawerEmpty } from './cart-drawer-empty';
 export * from './modals';
 export * from './form';
 export * from './checkout';

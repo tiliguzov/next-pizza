@@ -4,11 +4,16 @@ import { prisma } from '@/prisma/prisma-client';
 import { PayOrderTemplate } from '@/shared/components';
 import { CheckoutFormValues } from '@/shared/constants/checkout-form-schema';
 import { createCheckoutSession, sendEmail } from '@/shared/lib';
+import { CartStateItem } from '@/shared/lib/get-cart-details';
 import { Address } from '@/shared/store';
 import { OrderStatus } from '@prisma/client';
 import { cookies } from 'next/headers';
 
-export async function createOrder(data: CheckoutFormValues, address: Address) {
+export async function createOrder(
+  data: CheckoutFormValues,
+  address: Address,
+  cartItems: CartStateItem[],
+) {
   try {
     const cookieStore = cookies();
     const cartToken = cookieStore.get('cartToken')?.value;
@@ -73,7 +78,7 @@ export async function createOrder(data: CheckoutFormValues, address: Address) {
       },
     });
 
-    const response = await createCheckoutSession(data, address);
+    const response = await createCheckoutSession(data, address, cartItems, order.id);
 
     const url = response;
 

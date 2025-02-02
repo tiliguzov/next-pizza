@@ -11,18 +11,20 @@ import {
   CheckoutCart,
   CheckoutDeliveryInfo,
   CheckoutPersonalInfo,
+  CheckoutCartEmpty,
 } from '@/shared/components';
 
 import { checkoutFormSchema, CheckoutFormValues } from '@/shared/constants/checkout-form-schema';
 import { createOrder } from '@/app/actions';
 import toast from 'react-hot-toast';
 import React from 'react';
-import { useAddressStore } from '@/shared/store';
+import { useAddressStore, useCartStore } from '@/shared/store';
 
 export default function CheckoutPage() {
   const { totalAmount, loading } = useCart();
   const [submiting, setSubmiting] = React.useState(false);
   const address = useAddressStore((state) => state.address);
+  const cartItems = useCartStore((state) => state.items);
 
   const form = useForm<CheckoutFormValues>({
     resolver: zodResolver(checkoutFormSchema),
@@ -40,9 +42,8 @@ export default function CheckoutPage() {
 
   const onSubmit = async (data: CheckoutFormValues) => {
     try {
-      console.log(data);
       setSubmiting(true);
-      const url = await createOrder(data, address);
+      const url = await createOrder(data, address, cartItems);
 
       if (url) {
         toast.success('Order is successfully created! redirection to payment...');
@@ -62,6 +63,10 @@ export default function CheckoutPage() {
   const onError = (errors: any) => {
     console.log('Validation Errors:', errors);
   };
+
+  if (!cartItems.length) {
+    return <CheckoutCartEmpty className="h-[70vh]" />;
+  }
 
   return (
     <Container className="mt-10">
