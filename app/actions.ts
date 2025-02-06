@@ -78,7 +78,7 @@ export async function createOrder(
       },
     });
 
-    const response = await createCheckoutSession(data, address, cartItems, order.id);
+    const response = await createCheckoutSession(data, address, cartItems, String(order.id));
 
     const url = response;
 

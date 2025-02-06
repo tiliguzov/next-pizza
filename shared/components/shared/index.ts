@@ -1,4 +1,3 @@
-import { CartEmpty } from './cart-drawer-empty';
 export { SearchInput } from './search-input';
 export { Title } from './title';
 export { Header } from './header';
@@ -31,6 +30,8 @@ export { ErrorText } from './error-text';
 export { ClearButton } from './clear-button';
 export { AddressInput } from './form/address-input';
 export { CartDrawerEmpty } from './cart-drawer-empty';
+export { Providers } from './providers';
+export { ProfileButton } from './profile-button';
 export * from './modals';
 export * from './form';
 export * from './checkout';
