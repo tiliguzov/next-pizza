@@ -15,7 +15,7 @@ model User {
     email String @unique
     password String
     role UserRole @default(USER)
-    verified DateTime 
+    verified DateTime?
 
     provider String?
     providerId String?
@@ -114,6 +114,24 @@ model CartItem {
     updatedAt DateTime @updatedAt
 }
 
+model Story {
+    id Int @id @default(autoincrement())
+    previewImageUrl String
+    items StoryItem[]
+
+    createdAt DateTime @default(now())
+}
+
+model StoryItem {
+    id Int @id @default(autoincrement())
+
+    storyId Int
+    story Story @relation(fields: [storyId], references: [id])
+
+    sourceUrl String
+    createdAt DateTime @default(now())
+}
+
 model Order {
     id Int @id @default(autoincrement())
 
@@ -149,7 +167,7 @@ model VerificationCode {
     user User @relation(fields: [userId], references: [id])
     userId Int @unique
 
-    code String 
+    code String
 
     createdAt DateTime @default(now())
 

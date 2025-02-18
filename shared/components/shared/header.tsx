@@ -5,7 +5,7 @@ import React from 'react';
 import { AuthModal, CartButton, Container, ProfileButton, SearchInput } from '.';
 import Image from 'next/image';
 import Link from 'next/link';
-import { useSearchParams } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 import toast from 'react-hot-toast';
 
 interface Props {
@@ -15,18 +15,41 @@ interface Props {
 }
 
 export const Header: React.FC<Props> = ({ hasSearch = true, hasCart = true, className }) => {
+  const router = useRouter();
   const [openAuthModal, setOpenAuthModal] = React.useState(false);
 
   const searchParams = useSearchParams();
 
   React.useEffect(() => {
+    let toastSuccessMessage = '';
+    let toastErrorMessage = '';
+
     if (searchParams.has('paid')) {
-      setTimeout(() => toast.success('Order is paid! The information is send to email.'), 500);
+      toastSuccessMessage = 'Order is paid! The information is send to email.';
     } else if (searchParams.has('cancelled')) {
-      setTimeout(
-        () => toast.error('Order is not paid! Return to checkout page and try again.'),
-        500,
-      );
+      toastErrorMessage = 'Order is not paid! Return to checkout page and try again.';
+    }
+
+    if (searchParams.has('verified')) {
+      toastSuccessMessage = 'Email is successfully confirmed!';
+    }
+
+    if (toastSuccessMessage) {
+      setTimeout(() => {
+        router.replace('/');
+        toast.success(toastSuccessMessage, {
+          duration: 3000,
+        });
+      }, 1000);
+    }
+
+    if (toastErrorMessage) {
+      setTimeout(() => {
+        router.replace('/');
+        toast.error(toastErrorMessage, {
+          duration: 3000,
+        });
+      }, 1000);
     }
   }, []);
 
@@ -39,7 +62,7 @@ export const Header: React.FC<Props> = ({ hasSearch = true, hasCart = true, clas
             <Image src="/logo.png" alt="Logo" width={35} height={35} />
             <div>
               <h1 className="text-2xl uppercase font-black">Next Pizza</h1>
-              <p className="text-sm text-gray-400 leading-3">Вкусней уже некуда</p>
+              <p className="text-sm text-gray-400 leading-3"> It couldn't be tastier</p>
             </div>
           </div>
         </Link>
