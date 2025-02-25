@@ -1,2 +1,2 @@
-export const VAT = 5;
-export const DELIVERY_PRICE = 10;
+export const VAT = 7.5;
+export const DELIVERY_PRICE = 1000;

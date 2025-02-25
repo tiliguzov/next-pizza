@@ -5,7 +5,7 @@ import { WhiteBlock } from './white-block';
 import { CheckoutItemDetails } from './checkout-item-details';
 import { ArrowRight, Package, Percent, Truck } from 'lucide-react';
 import { Button, Skeleton } from '../ui';
-import { cn } from '@/shared/lib/utils';
+import { cn, priceInDollars } from '@/shared/lib/utils';
 import { useFormContext } from 'react-hook-form';
 import { DELIVERY_PRICE, VAT } from '@/shared/constants/payment';
 
@@ -30,7 +30,7 @@ export const CheckoutSidebar: React.FC<Props> = ({ totalAmount, loading, classNa
         {loading ? (
           <Skeleton className="w-40 h-11" />
         ) : (
-          <span className="h-11 text-[34px] font-extrabold">${totalPrice}</span>
+          <span className="h-11 text-[34px] font-extrabold">{priceInDollars(totalPrice)}</span>
         )}
       </div>
 
@@ -41,7 +41,13 @@ export const CheckoutSidebar: React.FC<Props> = ({ totalAmount, loading, classNa
             Cost of products:
           </div>
         }
-        value={loading ? <Skeleton className="w-16 h-6 rounded-[6px]" /> : `$${totalAmount}`}
+        value={
+          loading ? (
+            <Skeleton className="w-16 h-6 rounded-[6px]" />
+          ) : (
+            `${priceInDollars(totalAmount)}`
+          )
+        }
       />
       <CheckoutItemDetails
         title={
@@ -50,7 +56,9 @@ export const CheckoutSidebar: React.FC<Props> = ({ totalAmount, loading, classNa
             Taxes:
           </div>
         }
-        value={loading ? <Skeleton className="w-16 h-6 rounded-[6px]" /> : `$${vatPrice}`}
+        value={
+          loading ? <Skeleton className="w-16 h-6 rounded-[6px]" /> : `${priceInDollars(vatPrice)}`
+        }
       />
       <CheckoutItemDetails
         title={
@@ -63,7 +71,7 @@ export const CheckoutSidebar: React.FC<Props> = ({ totalAmount, loading, classNa
           loading ? (
             <Skeleton className="w-16 h-6 rounded-[6px]" />
           ) : (
-            `$${totalAmount ? DELIVERY_PRICE : 0}`
+            `${priceInDollars(totalAmount ? DELIVERY_PRICE : 0)}`
           )
         }
       />

@@ -8,7 +8,7 @@ import { Ingredient } from '@prisma/client';
 interface Props {
   id: number;
   name: string;
-  price: number;
+  price: string;
   imageUrl: string;
   ingredients: Ingredient[];
   className?: string;
@@ -38,7 +38,7 @@ export const ProductCard: React.FC<Props> = ({
 
       <div className="flex justify-between items-center mt-4">
         <span className="text-[20px]">
-          from <b>{price} $</b>
+          from <b>{price}</b>
         </span>
         <Link href={`/product/${id}`}>
           <Button variant="secondary" className="text-base font-bold">

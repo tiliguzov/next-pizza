@@ -1,4 +1,4 @@
-import { cn } from '@/shared/lib/utils';
+import { cn, priceInDollars } from '@/shared/lib/utils';
 import React from 'react';
 import { Title } from './title';
 import { Button } from '../ui';
@@ -37,7 +37,7 @@ export const ChooseProductForm: React.FC<Props> = ({
           loading={loading}
           onClick={onClickAddCart}
           className="h-[55px] px-10 text-base rounded-[18px] w-full mt-10">
-          Добавить в корзину за {price} $
+          Добавить в корзину за {priceInDollars(price)}
         </Button>
       </div>
     </div>

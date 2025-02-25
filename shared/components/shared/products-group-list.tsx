@@ -3,7 +3,7 @@
 import React from 'react';
 import { ProductCard, Title } from '.';
 import { useIntersection } from 'react-use';
-import { cn } from '@/shared/lib/utils';
+import { cn, priceInDollars } from '@/shared/lib/utils';
 import { useCategoryStore } from '@/shared/store/category';
 import { ProductWithRelations } from '@/@types/prisma';
 
@@ -43,7 +43,7 @@ export const ProductsGroupList: React.FC<Props> = ({
             id={product.id}
             name={product.name}
             imageUrl={product.imageUrl}
-            price={product.variations[0].price}
+            price={priceInDollars(product.variations[0].price)}
             ingredients={product.ingredients}
           />
         ))}

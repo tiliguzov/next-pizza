@@ -41,7 +41,7 @@ export const createCheckoutSession = async (
           images: [item.imageUrl],
         },
 
-        unit_amount: Math.floor(item.price * 100),
+        unit_amount: item.price,
       },
       quantity: item.quantity,
       tax_rates: ['txr_1Qnp6m2YBaZ7DgZd4NXm941B'],
@@ -60,7 +60,7 @@ export const createCheckoutSession = async (
         shipping_rate_data: {
           type: 'fixed_amount',
           fixed_amount: {
-            amount: DELIVERY_PRICE * 100,
+            amount: DELIVERY_PRICE,
             currency: 'usd',
           },
           display_name: 'Standard Shipping',
@@ -72,14 +72,12 @@ export const createCheckoutSession = async (
       },
     ],
     mode: 'payment',
-    success_url: `http://localhost:3000/?paid`,
-    cancel_url: `http://localhost:3000/?cancelled`,
+    success_url: process.env.NEXT_PUBLIC_APP_URL + '/?paid',
+    cancel_url: process.env.NEXT_PUBLIC_APP_URL + '/?cancelled',
     metadata: {
       orderId,
     },
   });
-
-  console.log(session.url);
 
   return session.url;
 };

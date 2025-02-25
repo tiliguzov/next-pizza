@@ -46,7 +46,6 @@ export default function CheckoutPage() {
   React.useEffect(() => {
     async function fetchUserInfo() {
       const data = await Api.auth.getMe();
-      console.log(data.fullName);
       const [firstName, lastName] = data.fullName.split(' ');
 
       form.setValue('firstName', firstName);
@@ -83,7 +82,7 @@ export default function CheckoutPage() {
     console.log('Validation Errors:', errors);
   };
 
-  if (!cartItems.length) {
+  if (!cartItems.length && !loading) {
     return <CheckoutCartEmpty className="h-[70vh]" />;
   }
 

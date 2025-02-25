@@ -7,7 +7,6 @@ import { NextRequest, NextResponse } from 'next/server';
 import Stripe from 'stripe';
 
 export async function POST(req: NextRequest) {
-  console.log('Webhook endpoint received a request');
   try {
     const event = (await req.json()) as Stripe.Event;
 
@@ -32,8 +31,6 @@ export async function POST(req: NextRequest) {
 
       const isSucceeded = session.payment_status === 'paid';
 
-      console.log(isSucceeded);
-
       await prisma.order.update({
         where: { id: orderId },
         data: { status: isSucceeded ? OrderStatus.SUCCEEDED : OrderStatus.CANCELLED },
@@ -54,8 +51,6 @@ export async function POST(req: NextRequest) {
           OrderCancelledTemplate({ orderId: order.id, items }),
         );
       }
-
-      console.log(`Order ${orderId} updated successfully.`);
     }
 
     return NextResponse.json({ received: true }, { status: 200 });

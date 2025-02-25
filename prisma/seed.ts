@@ -4,7 +4,7 @@ import { ingredients, categories, products } from './constants';
 import { Prisma } from '@prisma/client';
 
 const randomDecimalNumber = (min: number, max: number) => {
-  return Math.floor(Math.random() * (max - min) * 10 + min * 10) / 10;
+  return Math.round(Math.random() * (max - min) + min);
 };
 
 const generateProductItem = ({
@@ -18,7 +18,7 @@ const generateProductItem = ({
 }) => {
   return {
     productId,
-    price: randomDecimalNumber(7, 20),
+    price: randomDecimalNumber(700, 2000),
     pizzaType,
     size,
   } as Prisma.ProductVariationUncheckedCreateInput;
@@ -227,6 +227,8 @@ async function down() {
   await prisma.$executeRaw`TRUNCATE TABLE "Ingredient" RESTART IDENTITY CASCADE`;
   await prisma.$executeRaw`TRUNCATE TABLE "Cart" RESTART IDENTITY CASCADE`;
   await prisma.$executeRaw`TRUNCATE TABLE "CartItem" RESTART IDENTITY CASCADE`;
+  await prisma.$executeRaw`TRUNCATE TABLE "Story" RESTART IDENTITY CASCADE`;
+  await prisma.$executeRaw`TRUNCATE TABLE "StoryItem" RESTART IDENTITY CASCADE`;
 }
 
 async function main() {

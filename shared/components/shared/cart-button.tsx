@@ -1,6 +1,6 @@
 'use client';
 
-import { cn } from '@/shared/lib/utils';
+import { cn, priceInDollars } from '@/shared/lib/utils';
 import React from 'react';
 import { Button } from '../ui';
 import { ArrowRight, ShoppingCart } from 'lucide-react';
@@ -21,7 +21,7 @@ export const CartButton: React.FC<Props> = ({ className }) => {
       <Button
         loading={loading}
         className={cn('group relative', { 'w-[105px]': loading }, className)}>
-        <b>{totalAmount} $</b>
+        <b>{priceInDollars(totalAmount)}</b>
         <span className="h-full w-[1px] bg-white/30 mx-3" />
         <div className="flex items-center gap-1 transition duration-300 group-hover:opacity-0">
           <ShoppingCart size={16} className="relative" strokeWidth={2} />

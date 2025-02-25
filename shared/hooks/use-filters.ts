@@ -3,6 +3,7 @@
 import { useSearchParams } from 'next/navigation';
 import React from 'react';
 import { useSet } from 'react-use';
+import { createFilterQueryParams } from '../lib/create-filter-query-params';
 
 interface QueryFilters extends PriceProps {
   pizzaTypes: string;
@@ -27,6 +28,7 @@ interface ReturnProps extends Filters {
   setPizzaTypes: (key: string) => void;
   setSizes: (key: string) => void;
   setSelectedIngredients: (key: string) => void;
+  query: string;
 }
 
 export const useFilters = (): ReturnProps => {
@@ -64,6 +66,16 @@ export const useFilters = (): ReturnProps => {
     }));
   };
 
+  /* Query state */
+  const [query, setQuery] = React.useState(
+    createFilterQueryParams({
+      sizes,
+      pizzaTypes,
+      selectedIngredients,
+      prices,
+    }),
+  );
+
   return React.useMemo(
     () => ({
       sizes,
@@ -74,7 +86,8 @@ export const useFilters = (): ReturnProps => {
       setPizzaTypes: togglePizzaTypes,
       setSizes: toggleSizes,
       setSelectedIngredients: toggleIngredients,
+      query,
     }),
-    [sizes, pizzaTypes, selectedIngredients, prices],
+    [sizes, pizzaTypes, selectedIngredients, prices, query],
   );
 };

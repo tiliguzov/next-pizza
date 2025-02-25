@@ -8,20 +8,11 @@ interface Props {
 }
 
 export const CheckoutDeliveryInfo: React.FC<Props> = ({ className }) => {
-  const handleAddressValidationChange = (isValid: boolean) => {
-    console.log('Address Valid:', isValid);
-  };
-
   return (
     <div className={className}>
       <WhiteBlock title="3. Delivery address">
         <div className="flex flex-col gap-5">
-          <AddressInput
-            name="address"
-            idName="addressId"
-            className="text-base"
-            onValidationChange={handleAddressValidationChange}
-          />
+          <AddressInput name="address" idName="addressId" className="text-base" />
           <FormTextarea
             name="comment"
             rows={5}

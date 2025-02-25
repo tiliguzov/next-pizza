@@ -5,6 +5,7 @@ import { CheckoutItem } from '../checkout-item';
 import { PizzaSize, PizzaType } from '@/shared/constants/pizza';
 import { useCart } from '@/shared/hooks';
 import { CheckoutItemSkeleton } from '../checkout-item-skeleton';
+import { priceInDollars } from '@/shared/lib/utils';
 
 interface Props {
   loading?: boolean;
@@ -35,7 +36,7 @@ export const CheckoutCart: React.FC<Props> = ({ loading, className }) => {
                   item.pizzaSize as PizzaSize,
                 )}
                 name={item.name}
-                price={item.price}
+                price={priceInDollars(item.price * item.quantity)}
                 quantity={item.quantity}
                 disabled={item.disabled}
                 onClickCountButton={(type) => onClickCountButton(item.id, item.quantity, type)}

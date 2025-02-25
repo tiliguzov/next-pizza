@@ -16,7 +16,7 @@ import { ArrowRight } from 'lucide-react';
 import { CartDrawerItem } from './cart-drawer-item';
 import { getCartItemDetails } from '@/shared/lib';
 import { PizzaSize, PizzaType } from '@/shared/constants/pizza';
-import { cn } from '@/shared/lib/utils';
+import { cn, priceInDollars } from '@/shared/lib/utils';
 import { useCart } from '@/shared/hooks';
 import { CartDrawerEmpty } from './cart-drawer-empty';
 
@@ -59,7 +59,7 @@ export const CartDrawer: React.FC<React.PropsWithChildren> = ({ children }) => {
                       )}
                       disabled={item.disabled}
                       name={item.name}
-                      price={item.price}
+                      price={priceInDollars(item.price * item.quantity)}
                       quantity={item.quantity}
                       onClickCountButton={(type) =>
                         onClickCountButton(item.id, item.quantity, type)
@@ -78,7 +78,7 @@ export const CartDrawer: React.FC<React.PropsWithChildren> = ({ children }) => {
                       <div className="flex-1 border-b border-dashed border-b-neutral-200 relative -top-1 mx-2" />
                     </span>
 
-                    <span className="font-bold text-lg">{totalAmount} $</span>
+                    <span className="font-bold text-lg">{priceInDollars(totalAmount)}</span>
                   </div>
 
                   <Link href="/checkout">

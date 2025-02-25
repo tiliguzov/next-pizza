@@ -1,6 +1,6 @@
 'use client';
 
-import { cn } from '@/shared/lib/utils';
+import { cn, priceInDollars } from '@/shared/lib/utils';
 import React from 'react';
 import { Button } from '../ui';
 import { GroupVariants, IngredientItem, PizzaImage, Title } from '.';
@@ -32,7 +32,12 @@ export const ChoosePizzaForm: React.FC<Props> = ({
     usePizzaOptions(variations);
 
   const textDetails = `${size} sm, ${mapPizzaType[type]} dough`;
-  const totalPrice = calcTotalPizzaPrice(size, type, variations, ingredients, selectedIngredients);
+  const totalPrice = calcTotalPizzaPrice(
+    variations,
+    ingredients,
+    selectedIngredients,
+    currentVariationId,
+  );
 
   const handleOnClickCart = () => {
     if (currentVariationId) {
@@ -71,7 +76,7 @@ export const ChoosePizzaForm: React.FC<Props> = ({
               <IngredientItem
                 key={ingredient.id}
                 name={ingredient.name}
-                price={ingredient.price}
+                price={priceInDollars(ingredient.price)}
                 imageUrl={ingredient.imageUrl}
                 onClick={() => addIngredient(ingredient.id)}
                 active={selectedIngredients.has(ingredient.id)}
@@ -84,7 +89,7 @@ export const ChoosePizzaForm: React.FC<Props> = ({
           loading={loading}
           className="h-[55px] px-10 text-base rounded-[18px] w-full mt-10"
           onClick={handleOnClickCart}>
-          Добавить в корзину за {totalPrice} $
+          Добавить в корзину за {priceInDollars(totalPrice)}
         </Button>
       </div>
     </div>

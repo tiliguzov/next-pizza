@@ -7,8 +7,6 @@ interface Props {
 }
 
 export const OrderSuccessTemplate: React.FC<Props> = ({ orderId, items }) => {
-  console.log(items);
-
   return (
     <div>
       <h1> Thanks for payment! </h1>

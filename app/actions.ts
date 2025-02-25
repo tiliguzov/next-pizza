@@ -84,8 +84,6 @@ export async function createOrder(
 
     const url = response;
 
-    console.log(url);
-
     if (!url) {
       throw 'Cant create payment';
     }
