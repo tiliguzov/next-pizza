@@ -33,31 +33,31 @@ export const Filters: React.FC<Props> = ({ className }) => {
       <CheckboxFiltersGroup
         name="pizzaTypes"
         className="mb-5"
-        title="Типы теста"
+        title="Dough types"
         onClickCkeckbox={filters.setPizzaTypes}
         selected={filters.pizzaTypes}
         items={[
-          { text: 'традиционное', value: '1' },
-          { text: 'тонкое', value: '2' },
+          { text: 'traditional', value: '1' },
+          { text: 'thin', value: '2' },
         ]}
       />
 
       <CheckboxFiltersGroup
         name="sizes"
         className="mb-5"
-        title="Размеры"
+        title="Sizes"
         onClickCkeckbox={filters.setSizes}
         selected={filters.sizes}
         items={[
-          { text: '20 см', value: '20' },
-          { text: '30 см', value: '30' },
-          { text: '40 см', value: '40' },
+          { text: '20 cm', value: '20' },
+          { text: '30 cm', value: '30' },
+          { text: '40 cm', value: '40' },
         ]}
       />
 
-      {/* Фильтр цен */}
+      {/* Price filter */}
       <div className="mt-5 border-y border-y-neutral-100 py-6 pb-7">
-        <p className="font-bold mb-3">Цена от и до:</p>
+        <p className="font-bold mb-3">Price range:</p>
         <div className="flex gap-3 mb-5">
           <Input
             type="number"
@@ -87,7 +87,7 @@ export const Filters: React.FC<Props> = ({ className }) => {
       </div>
 
       <CheckboxFiltersGroup
-        title="Ingridients"
+        title="Ingredients"
         name="Ingredients"
         className="mt-5"
         limit={6}

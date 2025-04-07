@@ -58,7 +58,7 @@ async function up() {
 
   const pizza1 = await prisma.product.create({
     data: {
-      name: 'Пепперони фреш',
+      name: 'Pepperoni Fresh',
       imageUrl:
         'https://media.dodostatic.net/image/r:233x233/11EE7D61304FAF5A98A6958F2BB2D260.webp',
       categoryId: 1,
@@ -70,7 +70,7 @@ async function up() {
 
   const pizza2 = await prisma.product.create({
     data: {
-      name: 'Сырная',
+      name: 'Cheese',
       imageUrl:
         'https://media.dodostatic.net/image/r:233x233/11EE7D610CF7E265B7C72BE5AE757CA7.webp',
       categoryId: 1,
@@ -82,7 +82,7 @@ async function up() {
 
   const pizza3 = await prisma.product.create({
     data: {
-      name: 'Чоризо фреш',
+      name: 'Chorizo Fresh',
       imageUrl:
         'https://media.dodostatic.net/image/r:584x584/11EE7D61706D472F9A5D71EB94149304.webp',
       categoryId: 1,
@@ -94,12 +94,12 @@ async function up() {
 
   await prisma.productVariation.createMany({
     data: [
-      // Пицца "Пепперони фреш"
+      // Pepperoni Fresh
       generateProductItem({ productId: pizza1.id, pizzaType: 1, size: 20 }),
       generateProductItem({ productId: pizza1.id, pizzaType: 2, size: 30 }),
       generateProductItem({ productId: pizza1.id, pizzaType: 2, size: 40 }),
 
-      // Пицца "Сырная"
+      // Cheese
       generateProductItem({ productId: pizza2.id, pizzaType: 1, size: 20 }),
       generateProductItem({ productId: pizza2.id, pizzaType: 1, size: 30 }),
       generateProductItem({ productId: pizza2.id, pizzaType: 1, size: 40 }),
@@ -107,12 +107,12 @@ async function up() {
       generateProductItem({ productId: pizza2.id, pizzaType: 2, size: 30 }),
       generateProductItem({ productId: pizza2.id, pizzaType: 2, size: 40 }),
 
-      // Пицца "Чоризо фреш"
+      // Chorizo Fresh
       generateProductItem({ productId: pizza3.id, pizzaType: 1, size: 20 }),
       generateProductItem({ productId: pizza3.id, pizzaType: 2, size: 30 }),
       generateProductItem({ productId: pizza3.id, pizzaType: 2, size: 40 }),
 
-      // Остальные продукты
+      // Other products
       generateProductItem({ productId: 1 }),
       generateProductItem({ productId: 2 }),
       generateProductItem({ productId: 3 }),
@@ -162,28 +162,22 @@ async function up() {
   await prisma.story.createMany({
     data: [
       {
-        previewImageUrl:
-          'https://cdn.inappstory.ru/story/xep/xzh/zmc/cr4gcw0aselwvf628pbmj3j/custom_cover/logo-350x440.webp?k=IgAAAAAAAAAE&v=3101815496',
+        previewImageUrl: 'https://i.ibb.co/QFhFb2k0/Chat-GPT-Image-7-2025-09-27-09.png',
       },
       {
-        previewImageUrl:
-          'https://cdn.inappstory.ru/story/km2/9gf/jrn/sb7ls1yj9fe5bwvuwgym73e/custom_cover/logo-350x440.webp?k=IgAAAAAAAAAE&v=3074015640',
+        previewImageUrl: 'https://i.ibb.co/fGnWFZQk/Chat-GPT-Image-7-2025-09-33-10.png',
       },
       {
-        previewImageUrl:
-          'https://cdn.inappstory.ru/story/quw/acz/zf5/zu37vankpngyccqvgzbohj1/custom_cover/logo-350x440.webp?k=IgAAAAAAAAAE&v=1336215020',
+        previewImageUrl: 'https://i.ibb.co/mrWCq4Md/Chat-GPT-Image-7-2025-09-40-09.png',
       },
       {
-        previewImageUrl:
-          'https://cdn.inappstory.ru/story/7oc/5nf/ipn/oznceu2ywv82tdlnpwriyrq/custom_cover/logo-350x440.webp?k=IgAAAAAAAAAE&v=38903958',
+        previewImageUrl: 'https://i.ibb.co/fVKngx3f/Chat-GPT-Image-7-2025-09-49-14.png',
       },
       {
-        previewImageUrl:
-          'https://cdn.inappstory.ru/story/q0t/flg/0ph/xt67uw7kgqe9bag7spwkkyw/custom_cover/logo-350x440.webp?k=IgAAAAAAAAAE&v=2941222737',
+        previewImageUrl: 'https://i.ibb.co/RTmCfbbR/Chat-GPT-Image-7-2025-09-51-17.png',
       },
       {
-        previewImageUrl:
-          'https://cdn.inappstory.ru/story/lza/rsp/2gc/xrar8zdspl4saq4uajmso38/custom_cover/logo-350x440.webp?k=IgAAAAAAAAAE&v=4207486284',
+        previewImageUrl: 'https://i.ibb.co/4nT9y82j/Chat-GPT-Image-7-2025-09-53-34.png',
       },
     ],
   });
@@ -192,28 +186,35 @@ async function up() {
     data: [
       {
         storyId: 1,
-        sourceUrl:
-          'https://cdn.inappstory.ru/file/dd/yj/sx/oqx9feuljibke3mknab7ilb35t.webp?k=IgAAAAAAAAAE',
+        sourceUrl: 'https://i.ibb.co/mVDFnSzs/Chat-GPT-Image-7-2025-10-15-23.png',
       },
       {
         storyId: 1,
-        sourceUrl:
-          'https://cdn.inappstory.ru/file/jv/sb/fh/io7c5zarojdm7eus0trn7czdet.webp?k=IgAAAAAAAAAE',
+        sourceUrl: 'https://i.ibb.co/GQD6JvMn/Chat-GPT-Image-7-2025-10-19-03.png',
       },
       {
         storyId: 1,
-        sourceUrl:
-          'https://cdn.inappstory.ru/file/ts/p9/vq/zktyxdxnjqbzufonxd8ffk44cb.webp?k=IgAAAAAAAAAE',
+        sourceUrl: 'https://i.ibb.co/CprCPN7P/Chat-GPT-Image-7-2025-10-24-00.png',
       },
       {
         storyId: 1,
-        sourceUrl:
-          'https://cdn.inappstory.ru/file/ur/uq/le/9ufzwtpdjeekidqq04alfnxvu2.webp?k=IgAAAAAAAAAE',
+        sourceUrl: 'https://i.ibb.co/7xG7WM7M/Chat-GPT-Image-7-2025-10-09-47.png',
       },
       {
         storyId: 1,
-        sourceUrl:
-          'https://cdn.inappstory.ru/file/sy/vl/c7/uyqzmdojadcbw7o0a35ojxlcul.webp?k=IgAAAAAAAAAE',
+        sourceUrl: 'https://i.ibb.co/1fh1QHpj/Chat-GPT-Image-7-2025-10-09-48.png',
+      },
+      {
+        storyId: 2,
+        sourceUrl: 'https://i.ibb.co/v6XWcRKP/Chat-GPT-Image-7-2025-10-30-53.png',
+      },
+      {
+        storyId: 2,
+        sourceUrl: 'https://i.ibb.co/tpJW4WQ1/Chat-GPT-Image-7-2025-10-33-28.png',
+      },
+      {
+        storyId: 3,
+        sourceUrl: 'https://i.ibb.co/Xrn7SzCR/Chat-GPT-Image-7-2025-10-36-22.png',
       },
     ],
   });

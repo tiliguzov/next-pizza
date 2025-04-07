@@ -65,7 +65,7 @@ export const Stories: React.FC<Props> = ({ className }) => {
                 stories={selectedStory?.items.map((item) => ({ url: item.sourceUrl })) || []}
                 defaultInterval={3000}
                 width={520}
-                height={800}
+                height={780}
               />
             </div>
           </div>
